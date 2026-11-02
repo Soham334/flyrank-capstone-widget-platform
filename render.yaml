@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: relay-lead-capture
+    runtime: node
+    plan: free
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_VERSION
+        value: 24.11.0
+      - key: HOST
+        value: 0.0.0.0
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: TRUST_PROXY_HOPS
+        value: "1"
+      - key: GEO_MODE
+        value: mock
+      - key: NOTIFICATION_MODE
+        value: console
+      - key: JOB_INTERVAL_MS
+        value: "30000"
+      - key: DATABASE_URL
+        sync: false
+      - key: DEMO_URL
+        sync: false
+  - type: web
+    name: relay-customer-demo
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: ./demo
+    autoDeployTrigger: commit

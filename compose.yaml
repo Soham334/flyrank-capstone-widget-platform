@@ -1,0 +1,25 @@
+services:
+  relay:
+    build: .
+    ports:
+      - "127.0.0.1:4100:4100"
+    environment:
+      HOST: 0.0.0.0
+      BASE_URL: http://localhost:4100
+      DATABASE_PATH: /app/data/relay.sqlite
+      GEO_MODE: ${GEO_MODE:-mock}
+      MOCK_GEO_A_DOWN: ${MOCK_GEO_A_DOWN:-false}
+      MOCK_GEO_B_DOWN: ${MOCK_GEO_B_DOWN:-false}
+      NOTIFICATION_MODE: ${NOTIFICATION_MODE:-console}
+    volumes:
+      - relay-data:/app/data
+    init: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4100/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    stop_grace_period: 15s
+volumes:
+  relay-data:

@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "date": "2026-10-31T20:04:28.223Z",
+  "browser": "156.0.4314.50",
+  "checks": [
+    "Sign-in",
+    "Dashboard renders real aggregates",
+    "Create widget through UI",
+    "Builder preview",
+    "Snippet generation",
+    "Different-origin widget render",
+    "Different-origin POST returns 201",
+    "SSE automatically increments dashboard metric",
+    "Lead visible in owner dashboard",
+    "Lead status update",
+    "390px mobile layout without overflow",
+    "Edit dialog opens",
+    "No browser JS or CSP errors"
+  ],
+  "screenshots": [
+    "signin-desktop.png",
+    "dashboard-desktop.png",
+    "widget-builder.png",
+    "cross-origin-widget.png",
+    "dashboard-mobile.png"
+  ]
+}
